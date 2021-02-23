@@ -3,11 +3,13 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const post = require("./models/post")
-require('dotenv').config()
+// require('dotenv').config()
+
+const secret = require("./secret.json")
 
 const PORT = process.env.PORT || 3001
-const MONGODB_URI = process.env.MONGODB_URL
-const API_KEY = process.env.API_KEY
+const MONGODB_URI = secret.MONGODB_URL
+const API_KEY = secret.API_KEY
 
 mongoose.connect(String(MONGODB_URI), {
     // useFindAndModify: false,
