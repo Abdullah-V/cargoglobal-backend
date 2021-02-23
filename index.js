@@ -3,20 +3,19 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const post = require("./models/post")
-const dotenv = require("dotenv")
-dotenv.config();
+const dotenv = require("dotenv").config()
 
 const PORT = process.env.PORT || 3001
-const MONGODB_URI = process.env.MONGODB_URL
+// const MONGODB_URI = process.env.MONGODB_URL
 const API_KEY = process.env.API_KEY
 
-mongoose.connect(MONGODB_URI, {
+mongoose.connect(process.env.MONGODB_URL, {
     // useFindAndModify: false,
     // useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true
 },() => {
-    console.log(`database connected ${MONGODB_URI}`)
+    console.log(`database connected ${process.env.MONGODB_URL}`)
 });
 
 app.use(cors())
