@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3001
 const MONGODB_URI = process.env.MONGODB_URL
 const API_KEY = process.env.API_KEY
 
-mongoose.connect(MONGODB_URI, {
+mongoose.connect(String(MONGODB_URI), {
     // useFindAndModify: false,
     // useCreateIndex: true,
     useNewUrlParser: true,
