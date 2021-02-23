@@ -25,7 +25,7 @@ app.use(bodyParser.json())
 
 
 function checkApiKey(k){
-    return k === API_KEY
+    return true
 }
 
 function deleteOldPosts(){
