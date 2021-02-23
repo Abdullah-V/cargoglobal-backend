@@ -133,8 +133,34 @@ app.post('/api/getMultiplePostsByID',async (req,res) => {
             // console.log(posts)
             res.send(posts)
         })
+})
+
+app.post("/api/search",(req,res) => {
+    console.log("POST method on /api/search")
+
+    var text = req.body.text
+
+    post.find({
+        $or: [
+            { startCountry : { $regex: text, $options: 'i' }},
+            { endCountry : { $regex: text, $options: 'i' }},
+            { startCity : { $regex: text, $options: 'i' }},
+            { endCity : { $regex: text, $options: 'i' }},
+            // { startDate : { $regex: text, $options: 'i' }},
+            // { endDate : { $regex: text, $options: 'i' }},
+            { phoneNumber : { $regex: text, $options: 'i' }},
+            { additionalInformation : { $regex: text, $options: 'i' }},
+        ]
+    },(err,posts) => {
+        if(err) throw err
+
+        console.log(posts)
+        res.send(posts)
+    })
 
 })
+
+
 
 
 
