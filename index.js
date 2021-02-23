@@ -28,10 +28,27 @@ function checkApiKey(k){
     return k === API_KEY
 }
 
+function deleteOldPosts(){
+    return false
+}
 
 
-app.get("/api/all",(req,res) => {
-    console.log("GET method on /api/all ")
+
+app.get("/",(req,res) => {
+    res.send("<a href='https://cargoglobal.herokuapp.com'>https://cargoglobal.herokuapp.com</a>")
+})
+
+app.post("/api/all",(req,res) => {
+
+    console.log(checkApiKey(req.body.API_KEY))
+
+    if(!checkApiKey(req.body.API_KEY)){
+        return false
+    }
+
+    // console.log(process.env.API_KEY,req.body.API_KEY)
+
+    console.log("POST method on /api/all ")
     post
         .find({})
         .sort({createdDate: -1})
@@ -43,6 +60,10 @@ app.get("/api/all",(req,res) => {
 })
 
 app.post("/api/new",(req,res) => {
+    if(!checkApiKey(req.body.API_KEY)){
+        return false
+    }
+
     console.log("POST method on /api/new ")
     post.create(req.body)
         .then(newPost => {
@@ -53,6 +74,10 @@ app.post("/api/new",(req,res) => {
 })
 
 app.post("/api/remove",(req,res) => {
+    if(!checkApiKey(req.body.API_KEY)){
+        return false
+    }
+
     console.log("POST method on /api/remove ")
     post
         .findOneAndDelete({_id:req.body.postID},(err,removed) => {
@@ -63,6 +88,10 @@ app.post("/api/remove",(req,res) => {
 })
 
 app.post("/api/toggleLike",async (req,res) => {
+    if(!checkApiKey(req.body.API_KEY)){
+        return false
+    }
+
     console.log("POST method on /api/toggleLike ")
 
     var count = req.body.like ? 1 : -1
@@ -73,6 +102,9 @@ app.post("/api/toggleLike",async (req,res) => {
 })
 
 app.post("/api/getSinglePost",async (req,res) => {
+    if(!checkApiKey(req.body.API_KEY)){
+        return false
+    }
 
     console.log("POST method on /api/getSinglePost ")
 
@@ -115,6 +147,9 @@ app.post("/api/getSinglePost",async (req,res) => {
 })
 
 app.post('/api/getMultiplePostsByID',async (req,res) => {
+    if(!checkApiKey(req.body.API_KEY)){
+        return false
+    }
 
     console.log("POST method on /api/getMultiplePostsByID")
 
@@ -136,6 +171,10 @@ app.post('/api/getMultiplePostsByID',async (req,res) => {
 })
 
 app.post("/api/search",(req,res) => {
+    if(!checkApiKey(req.body.API_KEY)){
+        return false
+    }
+
     console.log("POST method on /api/search")
 
     var text = req.body.text
