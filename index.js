@@ -3,7 +3,8 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const post = require("./models/post")
-require('dotenv').config()
+const dotenv = require("dotenv")
+dotenv.config();
 
 const PORT = process.env.PORT || 3001
 const MONGODB_URI = process.env.MONGODB_URL
