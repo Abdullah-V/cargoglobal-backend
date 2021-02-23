@@ -5,13 +5,13 @@ const bodyParser = require('body-parser')
 const post = require("./models/post")
 // require('dotenv').config()
 
-const secret = require("./secret.json")
+const secret = require("secret.json")
 
 const PORT = process.env.PORT || 3001
 const MONGODB_URI = secret.MONGODB_URL
 const API_KEY = secret.API_KEY
 
-mongoose.connect(String(MONGODB_URI), {
+mongoose.connect(MONGODB_URI, {
     // useFindAndModify: false,
     // useCreateIndex: true,
     useNewUrlParser: true,
@@ -207,6 +207,7 @@ app.post("/api/search",(req,res) => {
 
 app.listen(PORT,() => {
     console.log('server running: ' + PORT)
+    console.log(__dirname)
 })
 
 
