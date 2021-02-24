@@ -134,12 +134,14 @@ app.post("/api/getSinglePost",async (req,res) => {
                             ]},
                         {_id: {$ne: willSended.post._id}}
                     ]
-                },(err,posts) => {
+                },async (err,posts) => {
                     if(err) throw err
 
-                    willSended.similarPosts = posts
+                    res.send({
+                        post: willSended.post,
+                        similarPosts: posts
+                    })
                 })
-            res.send(willSended)
         }else {
             res.send(false)
         }
